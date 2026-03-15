@@ -109,8 +109,8 @@ interface AppContextType {
     fetchTasks: (taskListId: string) => Promise<void>;
     createTask: (taskListId: string, task: Omit<Task, "id" | "taskListId">) => Promise<void>;
     getTask: (taskListId: string, taskId: string) => Promise<void>;
-    updateTask: (taskListId: string, taskId: string | undefined, task: Task) => Promise<void>;
-    deleteTask: (taskListId: string, taskId: string | undefined) => Promise<void>;
+    updateTask: (taskListId: string, taskId: string, task: Task) => Promise<void>;
+    deleteTask: (taskListId: string, taskId: string) => Promise<void>;
   };
 }
 
@@ -156,11 +156,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     },
     updateTask: async (taskListId, taskId, task) => {
       const response = await axios.put<Task>(`${BASE_URL}/api/task-lists/${taskListId}/tasks/${taskId}`, task, jsonHeaders);
-      dispatch({ type: UPDATE_TASK, payload: { taskListId, taskId, task: response.data } });
+      dispatch({ type: UPDATE_TASK, payload: { taskListId, taskId: taskId, task: response.data } });
     },
     deleteTask: async (taskListId, taskId) => {
       await axios.delete(`${BASE_URL}/api/task-lists/${taskListId}/tasks/${taskId}`, jsonHeaders);
-      dispatch({ type: DELETE_TASK, payload: { taskListId, taskId } });
+      dispatch({ type: DELETE_TASK, payload: { taskListId, taskId: taskId } });
     },
   };
 
