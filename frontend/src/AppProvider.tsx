@@ -109,8 +109,8 @@ interface AppContextType {
     fetchTasks: (taskListId: string) => Promise<void>;
     createTask: (taskListId: string, task: Omit<Task, "id" | "taskListId">) => Promise<void>;
     getTask: (taskListId: string, taskId: string) => Promise<void>;
-    updateTask: (taskListId: string, taskId: string, task: Task) => Promise<void>;
-    deleteTask: (taskListId: string, taskId: string) => Promise<void>;
+    updateTask: (taskListId: string, taskId: string | undefined, task: Task) => Promise<void>;
+    deleteTask: (taskListId: string, taskId: string | undefined) => Promise<void>;
   };
 }
 

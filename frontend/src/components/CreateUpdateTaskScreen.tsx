@@ -99,12 +99,12 @@ const CreateUpdateTaskScreen: React.FC = () => {
 
       if (isUpdate && taskId) {
         await api.updateTask(listId, taskId, {
-          id: taskId,
-          title,
-          description,
-          dueDate,
-          priority,
-          status,
+            id: taskId,
+            title,
+            description,
+            dueDate,
+            priority,
+            status,
         });
       } else {
         await api.createTask(listId, {
