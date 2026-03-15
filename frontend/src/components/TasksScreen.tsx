@@ -67,7 +67,7 @@ const TaskListScreen: React.FC = () => {
       updatedTask.status =
           task.status === TaskStatus.CLOSED ? TaskStatus.OPEN : TaskStatus.CLOSED;
       api
-          .updateTask(listId!, task.id, updatedTask)
+          .updateTask(listId!, task.id!, updatedTask)  // ✅ Added ! to task.id
           .then(() => api.fetchTasks(listId!));
     }
   };
@@ -118,7 +118,7 @@ const TaskListScreen: React.FC = () => {
                 </Button>
                 <Button
                     variant="ghost"
-                    onClick={() => api.deleteTask(listId!, task.id)}
+                    onClick={() => api.deleteTask(listId!, task.id!)}  // ✅ Added ! to task.id
                     aria-label={`Delete task "${task.title}"`}
                 >
                   <Trash className="h-4 w-4" />
@@ -128,7 +128,7 @@ const TaskListScreen: React.FC = () => {
           </TableRow>
       ));
     } else {
-      return [];  // ✅ Fixed: was null before
+      return [];
     }
   };
 
